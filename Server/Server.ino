@@ -5,6 +5,9 @@
 
 #define COOLER 3
 #define WATER_PUMP 4
+#define echoPin 8
+#define trigPin 9
+
 
 byte mac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 IPAddress ip(192,168,1,10);
@@ -17,23 +20,28 @@ const size_t CAPACITY = JSON_OBJECT_SIZE(5);
 StaticJsonDocument<CAPACITY> doc;
 
 char output[200];
-float set_temperature = 21.5;
-float set_soil_moisture = 60;
-int trigPin = 9;   
-int echoPin = 8;    
-
 float duration_us, level;
+float set_temperature = 23;
+float set_soil_moisture = 60;
 
-
-void set_regulation(float temp, float set_temp, byte actuator)
-{
+void temperature_regulation(float temp, float set_temp){
   if( temp >= set_temp){
-    digitalWrite(actuator,LOW);
+    digitalWrite(COOLER,LOW);
   }
   if( temp < set_temp){
-    digitalWrite(actuator,HIGH);
+    digitalWrite(COOLER,HIGH);
   }
 }
+
+void soil_moisture_regulation(float soil_moisture, float set_soil_moisture){
+  if( soil_moisture < set_soil_moisture){
+    digitalWrite(WATER_PUMP,LOW);
+  }
+  if( soil_moisture >= set_soil_moisture){
+    digitalWrite(WATER_PUMP,HIGH);
+  }
+}
+
 float getWaterLevel(){
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
@@ -67,8 +75,8 @@ void loop() {
   int soilMoisture = map(soilMoistureInput,200,1100,100,0);
   int light = analogRead(A1);
 
-  set_regulation(t,set_temperature,COOLER);
-  set_regulation(soilMoisture,set_soil_moisture,WATER_PUMP);
+  temperature_regulation(t,set_temperature);
+  soil_moisture_regulation(soilMoisture,set_soil_moisture);
 
   JsonObject object = doc.to<JsonObject>();
 
