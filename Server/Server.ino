@@ -11,7 +11,7 @@
 
 byte mac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 IPAddress ip(192,168,1,10);
-EthernetServer server(8080);
+EthernetServer server(80);
 EthernetClient client;
 
 DHT dht(2,DHT11);
@@ -100,6 +100,9 @@ void loop() {
               Serial.write(character);
               if (character == '\n' && currentLineIsBlank) 
                 {
+                  while(client.available()){
+                    Serial.write(client.read());
+                  }
                   client.println ("HTTP/1.1 200 OK");
                   client.println ("Content-Type: application/json");
                   client.println("Access-Control-Allow-Origin: *");
