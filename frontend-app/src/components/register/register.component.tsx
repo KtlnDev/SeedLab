@@ -2,18 +2,61 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import './register.style.css'
 
+interface User{
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+}
 
-class RegisterComponent extends React.Component{
+class RegisterComponent extends React.Component<{},User>{
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+        }
+    }
+
+    handleSubmit(event){
+        console.log(this.state)
+        event.preventDefault();
+    }
+
+    handleChange(event){
+        const {name, value} = event.target;
+
+        switch(name){
+            case "firstName":
+                this.setState({firstName: value});
+                break;
+            case "lastName":
+                this.setState({lastName: value});
+                break;
+            case "email":
+                this.setState({email: value});
+                break;
+            case "password":
+                this.setState({password: value});
+                break;
+            default:break;
+        }
+    }
+
     render(){
         return(
             <div className="register-wrapper">
                 <div className="register-container">
                     <h1>Create account</h1>
-                    <form className="form">
-                        <TextField id="firstName" label="First Name" type="text" variant="outlined" required/>
-                        <TextField className="lname" id="lastName" label="Last Name" type="text" variant="outlined" required/> 
-                        <TextField id="email" label="Email" type="text" variant="outlined" required/>
-                        <TextField id="password" label="Password" type="password" variant="outlined" required/>
+                    <form className="form" onSubmit={this.handleSubmit}>
+                        <TextField id="firstName" name="firstName" label="First Name" type="text" variant="outlined" onChange={this.handleChange} required/>
+                        <TextField className="lname" id="lastName" name="lastName" label="Last Name" type="text" variant="outlined" onChange={this.handleChange} required/> 
+                        <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={this.handleChange} required/>
+                        <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={this.handleChange} required/>
                         <div className="createAccount">
                             <button className="register-button">Create account</button>
                             <a href="/login" className="linkToLogin">Already Have an Account?</a>
