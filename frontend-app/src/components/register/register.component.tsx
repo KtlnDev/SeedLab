@@ -2,14 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import './register.style.css'
 
-interface User{
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-}
-
-class RegisterComponent extends React.Component<{},User>{
+class RegisterComponent extends React.Component{
     constructor(props){
         super(props);
         this.handleChange = this.handleChange.bind(this);
