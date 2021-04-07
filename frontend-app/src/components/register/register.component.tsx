@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import NavigationBar from '../navigation-bar/navigation.component'
 import './register.style.css'
 
 class RegisterComponent extends React.Component{
@@ -42,7 +43,8 @@ class RegisterComponent extends React.Component{
 
     render(){
         return(
-            <div className="register-wrapper">
+            <div className="register-page">
+                <NavigationBar/>
                 <div className="register-container">
                     <h1>Create account</h1>
                     <form className="form" onSubmit={this.handleSubmit}>

@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import NavigationBar from '../navigation-bar/navigation.component'
 import './login.style.css'
 
 class LoginComponent extends React.Component{
@@ -33,7 +34,8 @@ class LoginComponent extends React.Component{
     }
     render(){
         return(
-            <div className="login-wrapper">
+            <div className="login-page">
+                <NavigationBar/>
                 <div className="login-container">
                     <h1>Login</h1>
                     <form className="form" onSubmit={this.handleSubmit}>

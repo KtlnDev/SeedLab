@@ -1,14 +1,14 @@
 import React from 'react';
-import './navbar.style.css'
+import './navigation.style.css'
 
-class Navigation extends React.Component{
+class NavigationBar extends React.Component{
     render(){
         return(
-            <div className="nav-bar">
+            <div className="navigationBar">
                 <div className="title">
                     <a className="item" href="/">Project Name</a>
                 </div>
-                <div className="action-bar">
+                <div className="buttons">
                     <a className="btn" href="/register">Register</a>
                     <a className="btn" href="/login">Login</a>
                 </div>
@@ -17,4 +17,4 @@ class Navigation extends React.Component{
     }
 }
 
-export default Navigation;
+export default NavigationBar;

@@ -1,4 +1,4 @@
-.nav-bar {
+.navigationBar {
   width: 100%;
   height: auto;
   display: flex;
@@ -22,7 +22,7 @@
   color: white;
 }
 
-.action-bar {
+.buttons {
   width: 50%;
   margin: 8px;
   padding-right: 15px;
