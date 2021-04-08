@@ -6,20 +6,16 @@ import WelcomeComponent from './components/welcome/welcome.component'
 import LoginComponent from './components/login/login.component'
 import RegisterComponent from './components/register/register.component'
 
-class App extends React.Component{
-  render(){
-    return (
-      <Router>
-        <div className="App">
-        <Switch>
-            <Route path="/" exact component={WelcomeComponent}/>
-            <Route path="/login" component={LoginComponent}/>
-            <Route path="/register" component={RegisterComponent}/>
-          </Switch>
-        </div>    
-      </Router>
-    );
-  }
+export default function App(){
+  return (
+    <Router>
+      <div className="App">
+      <Switch>
+          <Route path="/" exact component={WelcomeComponent}/>
+          <Route path="/login" component={LoginComponent}/>
+          <Route path="/register" component={RegisterComponent}/>
+        </Switch>
+      </div>    
+    </Router>
+  );
 }
-
-export default App;
