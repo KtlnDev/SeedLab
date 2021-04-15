@@ -13,7 +13,7 @@ export default function ItemView(props){
                         <label className="value">{props.value}</label>
                         <label className="unit">{props.unit}</label>
                     </div> 
-                    <label className="extraInfo">Cooler Status: OFF</label>                   
+                    <label className="extraInfo">{props.extraInfo}</label>                   
                 </div>
                 <img src={props.icon}  className="icon-design" alt="temp"/>
             </div>

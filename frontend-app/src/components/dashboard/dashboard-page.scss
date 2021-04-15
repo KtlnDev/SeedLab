@@ -1,32 +1,45 @@
 .dashboard{
     width: 100%;
     height: 100vh;
+    background-color: #E0E2DB;
+    display:flex;
+    flex-direction: column;
 }
-.header{
-    width: 100%;
-    height: auto; 
+.content-page{
     display: flex;
     flex-direction: row;
-    background-color: #262626;
 }
-.title{
-    width: 75%;
-    color:wheat;
-}
-.title > label{
-    margin-right:40px;
-}
-.title > a{
-    margin:5px;
-    text-decoration: none;
-    color:wheat;
-}
-.actions{
-    width: 25%;
-    background-color: teal;
-    padding:5px;
-    color:wheat;
-}
-.card{
+
+.card{ 
+    width: 50%;
     display: flex;
-  }
+    flex-direction: column;
+    padding: 20px 40px;
+}
+
+.configuration{
+    width: 50%;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.last-row{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.configuration-view{
+    width:90%;
+    height: 90vh;
+    margin-top:20px;
+    background-color: white;
+    border-radius: 20px;
+}
