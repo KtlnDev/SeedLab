@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import AccountIcon from '../../images/accountIcon.png';
+import Image from 'react-bootstrap/Image';
 import './login-page.scss'
 
 export default function LoginPage(){
@@ -21,11 +22,11 @@ export default function LoginPage(){
             <div className="left-image"></div>
             <div className="right-side-login">
                 <div className="login-container">
-                    <img src={AccountIcon} alt="Logo" className="icon"></img>
+                    <Image src={AccountIcon} className="icon" rounded />
                     <h1 className="loginLabel">Login</h1>
                     <form className="form" onSubmit={handleSubmit}>
-                        <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)} required/>
-                        <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={e => setPassword(e.target.value)} required/>
+                        <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)} />
+                        <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={e => setPassword(e.target.value)} />
                         <div className="login">
                             <button className="login-button">Login</button>
                             <a href="/register" className="linkToRegister">Don't have an account yet? Sign up!</a>

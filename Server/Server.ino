@@ -10,7 +10,7 @@
 #define trigPin 9
 
 byte mac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-IPAddress ip(192,168,1,10);
+IPAddress ip(192,168,1,7);
 EthernetServer server(80);
 EthernetClient client;
 

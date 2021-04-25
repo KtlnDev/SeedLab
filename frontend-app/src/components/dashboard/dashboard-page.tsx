@@ -1,7 +1,7 @@
 import React from 'react'
 import './dashboard-page.scss'
-import ItemView from '../item-view/item-view';
 import NavigationBar from '../navigation-bar/navigation-bar'
+import ItemView from '../item-view/item-view'
 import TemperatureIcon from '../../images/icons/temperature.png'
 import HumidityIcon from '../../images/icons/humidity.png'
 import SoilMoistureIcon from '../../images/icons/soilMoisture.png'
@@ -25,7 +25,7 @@ export default function Dashboard(){
                     <div className="last-row">
                         <ItemView className="itemView" name="Water Level" value="25" unit="%" icon={WaterLevelIcon}/>
                     </div>
-                </div>
+                </div> 
                 <div className="configuration">
                     <div className="configuration-view"></div>
                 </div>

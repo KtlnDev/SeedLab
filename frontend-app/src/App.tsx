@@ -7,6 +7,7 @@ import LoginPage from './components/login/login-page'
 import RegisterPage from './components/register/register-page'
 import Dashboard from './components/dashboard/dashboard-page'
 import Configuration from './components/configuration/configuration-page'
+import ItemView from './components/item-view/item-view'
 
 export default function App(){
   return (
@@ -18,8 +19,9 @@ export default function App(){
           <Route path="/register" component={RegisterPage}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/configuration" component={Configuration}/>
+          <Route path="/item" component={ItemView}/>
         </Switch>
-      </div>    
+      </div>
     </Router>
   );
 }
