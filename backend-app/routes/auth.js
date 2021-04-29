@@ -9,24 +9,16 @@ router.post('/register', async (req,res) => {
     const { firstName, lastName, email, password, confirmPassword} = req.body;
     
     if(!emailValidator.validate(email))
-        return res.status(400).json({
-            errorMessage: "Email address is not valid!"
-        })
+        return res.status(400).json("Email address is not valid!")
     
     if(password.length < 6)
-        return res.status(400).json({
-            errorMessage: "Please enter a password of at least 6 characters"
-        })
+        return res.status(400).json("Please enter a password of at least 6 characters")
     
     if(password !== confirmPassword)
-        return res.status(400).json({
-            errorMessage: "Wrong confirmation password!"
-        })
+        return res.status(400).json("Wrong confirmation password!")
     
     const existingUser = await User.findOne({email});
-    if(existingUser) return res.status(400).json({
-        errorMessage: "Email already exists!"
-    })
+    if(existingUser) return res.status(400).json("Email already exists!")
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -51,18 +43,16 @@ router.post('/login', async (req,res) => {
         const{ email, password} = req.body;
 
         if(!emailValidator.validate(email))
-            return res.status(400).json({
-                errorMessage: "Email address is not valid!"
-            })
+            return res.status(400).json("Email address is not valid!")
 
         const existingUser = await User.findOne({email});
 
         if(!existingUser) 
-            return res.status(401).json({errorMessage:"Email address is not exists!"});
+            return res.status(401).json("Email address is not exists!");
         
         const verifyPassword = await bcrypt.compare(req.body.password, existingUser.password);
         if(!verifyPassword)
-            return res.status(401).json({errorMessage:"Wrong password"});
+            return res.status(401).json("Wrong password");
         
         const token = jwt.sign({_id: existingUser._id, firstName: existingUser.firstName, lastName: existingUser.lastName}, process.env.TOKEN_SECRET);
             res.cookie('access_token',token,{
