@@ -12,6 +12,7 @@ export default function WelcomePage(){
                     <a className="btn" href="/login">LOGIN</a>
                     <a className="btn" href="/register">REGISTER</a>
                 </div>
+                <label className="credits">Powered by Cătălin-Mihai Banu</label>
             </div>
         </div>
     )

@@ -11,20 +11,23 @@ export default function RegisterPage(){
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
 
-        const user ={
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
+        try{
+            const registerData ={
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            }
+            await axios.post('http://localhost:5000/user/register',registerData);
+        }catch(err){
+            console.log(err);
         }
-        console.log(user);
-        axios.post('http://localhost:5000/users/add',user)
-        .then(res => console.log(res.data));
-
        /* window.location.href = "/login";   */
     }
 
@@ -36,10 +39,11 @@ export default function RegisterPage(){
                     <Image src={AccountIcon} className="icon" rounded />
                     <h1>Create account</h1>
                     <form className="form" onSubmit={handleSubmit}>
-                        <TextField id="firstName" name="firstName" label="First Name" type="text" variant="outlined" onChange={e => setFirstName(e.target.value)} />
-                        <TextField className="lname" id="lastName" name="lastName" label="Last Name" type="text" variant="outlined" onChange={e => setLastName(e.target.value)} /> 
-                        <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)} />
-                        <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={e => setPassword(e.target.value)} />
+                        <TextField id="firstName" name="firstName" label="First Name" type="text" variant="outlined" onChange={e => setFirstName(e.target.value)} required/>
+                        <TextField className="lname" id="lastName" name="lastName" label="Last Name" type="text" variant="outlined" onChange={e => setLastName(e.target.value)} required/> 
+                        <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)} required/>
+                        <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={e => setPassword(e.target.value)} required/>
+                        <TextField id="confirmPassword" name="confirmPassword" label="Confirm password" type="password" variant="outlined" onChange={e => setConfirmPassword(e.target.value)} required/>
                         <div className="createAccount">
                             <button className="register-button">Create account</button>
                             <a href="/login" className="linkToLogin">Already Have an Account?</a>
