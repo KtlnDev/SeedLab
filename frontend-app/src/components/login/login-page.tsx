@@ -3,13 +3,14 @@ import TextField from '@material-ui/core/TextField';
 import AccountIcon from '../../images/accountIcon.png';
 import Image from 'react-bootstrap/Image';
 import axios from 'axios';
-import './login-page.scss'
+import './login-page.scss';
 
-export default function LoginPage(){
+const LoginPage = (props) =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-     
-    async function handleSubmit(event){
+    const [errorMessage, setErrorMessage] = useState('');
+
+    async function loginHandler(event){
         event.preventDefault();
         
         try{
@@ -18,15 +19,11 @@ export default function LoginPage(){
                 password: password
             };
 
-            await axios.post('http://localhost:5000/user/login',loginData)
-            .then(res => {
-                if(res.status === 200)
-                    window.location.href = "/dashboard";
-                else 
-                    window.location.href = "/login";
-                });
+            await axios.post('http://localhost:5000/user/login',loginData);
+            setErrorMessage('');
+            props.history.push('/dashboard');
         }catch(err){
-                console.log(err);
+            setErrorMessage(err.response.data.errorMessage);
         }
     }
 
@@ -37,9 +34,10 @@ export default function LoginPage(){
                 <div className="login-container">
                     <Image src={AccountIcon} className="icon" rounded />
                     <h1 className="loginLabel">Login</h1>
-                    <form className="form" onSubmit={handleSubmit}>
+                    <form className="form" onSubmit={loginHandler}>
                         <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)}  required/>
                         <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={e => setPassword(e.target.value)}  required/>
+                        <span className="errorMessage">{errorMessage}</span>
                         <div className="login">
                             <button className="login-button">Login</button>
                             <a href="/register" className="linkToRegister">Don't have an account yet? Sign up!</a>
@@ -49,4 +47,6 @@ export default function LoginPage(){
             </div>
         </div>
     )
-}
+};
+
+export default LoginPage;
