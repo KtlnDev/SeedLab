@@ -1,41 +1,42 @@
 .navigationBar {
   width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
+
+  display: grid;
+  grid-template-columns: 170px auto 200px 60px;
   background-color: #262626;
 }
 
-.left-navbar{
-  width: 80%;
-  color: white;
-}
-
-.left-navbar > label{
+.title{
   font-size:2em;
-  margin: 2% 20px;
+  margin-bottom: 2%;
+  margin-left:10%;
   color:burlywood;
 }
 
-.left-navbar > a{
+.links{
+  color: white;
+  align-self: center;
+}
+
+.links > a{
   text-decoration: none;
   color: white;
   margin: 5px 15px;
 }
 
-.left-navbar > a:hover{
+.links > a:hover{
   color: #697268;
 }
 
-.right-navbar{
-  width: 20%;
-  padding-right: 20px;
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.right-navbar > label{
+.username{
   font-size: 20px;
   color: white;
   margin: 2% 5px;
+  align-self: center;
+  justify-self: flex-end;
+}
+.logout{
+  background-color: #262626;
+  border: none;
+  padding-top: 10px;
 }

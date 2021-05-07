@@ -1,18 +1,28 @@
 import React from 'react';
+import axios from 'axios';
+import LogoutIcon from '../../images/logout.png';
 import './navigation.scss'
 
-function NavigationBar(props){
+const NavigationBar = (props) =>{
+
+    async function logoutHandler(){
+        try{
+            await axios.get("http://localhost:5000/user//logout");
+            window.location.href='/login';
+        }catch(err){
+            console.log(err);
+        }
+    }
+    
     return(
         <div className="navigationBar">
-           <div className="left-navbar">
-                <label>SeedLab</label>
-                <a href='/dashboard'>DASHBOARD</a>|
-                <a href='/configuration'>CONFIGURATION</a>
-            </div>
-            <div className="right-navbar">
-                <label>{props.lastName}</label>
-                <label>{props.firstName}</label>
-            </div>
+           <span className="title">SeedLab</span>
+           <div className="links">
+                <a href='/main-page'>DASHBOARD</a>|
+                <a href='/main-page/configuration'>CONFIGURATION</a>
+           </div>
+           <span className="username">{props.username}</span>
+           <button className="logout"><img src={LogoutIcon} alt="Image not found" onClick={logoutHandler}/></button>
         </div>
     )
 }
