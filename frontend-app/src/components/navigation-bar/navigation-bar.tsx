@@ -22,7 +22,7 @@ const NavigationBar = (props) =>{
                 <a href='/main-page/configuration'>CONFIGURATION</a>
            </div>
            <span className="username">{props.username}</span>
-           <button className="logout"><img src={LogoutIcon} alt="Image not found" onClick={logoutHandler}/></button>
+           <button className="logout"><img src={LogoutIcon} alt="Not found" onClick={logoutHandler}/></button>
         </div>
     )
 }
