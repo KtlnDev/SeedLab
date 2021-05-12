@@ -1,5 +1,70 @@
-.dashboard{
+.configuration{
     width: 100%;
-    height: 100vh;
+    height: calc(100% - 46px);
     background-color: #E0E2DB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.configuration-container{
+    width: 40%;
+    height: 75vh;
+    margin-top: 1%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-self: center;
+    align-self: center;
+    overflow: auto;
+}
+
+.title-config{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid;
+}
+
+.form-div{
+    margin: top 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+.form-container{
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    margin:4px 0;
+}
+
+.item > label{
+    margin-bottom:4px;
+}
+
+.btn-config{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.instructions{
+    padding: 2px 5px;
+    border-top: 2px solid;
+    text-align: justify;
+    color:gray;
 }

@@ -4,8 +4,7 @@ import axios from 'axios';
 import WelcomePage from './components/welcome/welcome-page';
 import LoginPage from './components/login/login-page';
 import RegisterPage from './components/register/register-page';
-import Dashboard from './components/dashboard/dashboard-page';
-import Configuration from './components/configuration/configuration-page';
+import MainPage from './components/main/main';
 import './App.css';
 
 axios.defaults.withCredentials = true;
@@ -18,8 +17,7 @@ export default function App(){
           <Route path="/" exact component={WelcomePage}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/configuration" component={Configuration}/>
+          <Route path="/main-page" component={MainPage}/>
         </Switch>
       </div>
     </Router>
