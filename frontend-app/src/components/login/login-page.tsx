@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import TextField from '@material-ui/core/TextField';
-import AccountIcon from '../../images/accountIcon.png';
+import LoginIcon from '../../images/loginIcon.png';
 import Image from 'react-bootstrap/Image';
 import axios from 'axios';
 import './login-page.scss';
@@ -21,7 +21,7 @@ const LoginPage = (props) =>{
 
             await axios.post('http://localhost:5000/user/login',loginData);
             setErrorMessage('');
-            props.history.push('/dashboard');
+            props.history.push('/main-page');
         }catch(err){
             setErrorMessage(err.response.data.errorMessage);
         }
@@ -32,15 +32,15 @@ const LoginPage = (props) =>{
             <div className="left-image"></div>
             <div className="right-side-login">
                 <div className="login-container">
-                    <Image src={AccountIcon} className="icon" rounded />
-                    <h1 className="loginLabel">Login</h1>
+                    <Image src={LoginIcon} className="icon" rounded />
+                    <h1 className="loginLabel">Logare</h1>
                     <form className="form" onSubmit={loginHandler}>
-                        <TextField id="email" name="email" label="Email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)}  required/>
-                        <TextField id="password" name="password" label="Password" type="password" variant="outlined" onChange={e => setPassword(e.target.value)}  required/>
+                        <TextField id="email" name="email" label="Adresa de email" type="text" variant="outlined" onChange={e => setEmail(e.target.value)}  required/>
+                        <TextField id="password" name="password" label="Parolă" type="password" variant="outlined" onChange={e => setPassword(e.target.value)}  required/>
                         <span className="errorMessage">{errorMessage}</span>
                         <div className="login">
-                            <button className="login-button">Login</button>
-                            <a href="/register" className="linkToRegister">Don't have an account yet? Sign up!</a>
+                            <button className="login-button">Logare</button>
+                            <a href="/register" className="linkToRegister">Nu ai încă un cont? Hai să creăm unul!</a>
                         </div>                 
                     </form>
                 </div>

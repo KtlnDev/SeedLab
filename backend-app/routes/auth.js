@@ -11,22 +11,22 @@ router.post('/register', async (req,res) => {
     
     if(!emailValidator.validate(email))
         return res.status(400).json({
-            errorMessage:"Email address is not valid!"
+            errorMessage:"Adresa de email nu este validă!"
         });
     
     if(password.length < 6)
         return res.status(400).json({
-            errorMessage:"Please enter a password of at least 6 characters!"
+            errorMessage:"Te rugăm să introduci o parolă de cel puțin 6 caractere!"
         });
     
     if(password !== confirmPassword)
         return res.status(400).json({
-            errorMessage:"Your password and confirmation password do not match!"
+            errorMessage:"Parolele nu se potrivesc!"
         });
     
     const existingUser = await User.findOne({email});
     if(existingUser) return res.status(400).json({
-        errorMessage:"Email already exists!"
+        errorMessage:"Această adresă de email este folosită!"
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -55,20 +55,20 @@ router.post('/login', async (req,res) => {
 
         if(!emailValidator.validate(email))
             return res.status(400).json({
-                errorMessage:"Email address is not valid!"
+                errorMessage:"Adresa de email nu este validă!"
             });
 
         const existingUser = await User.findOne({email});
 
         if(!existingUser) 
             return res.status(404).json({
-                errorMessage:"Email address is not exists!"
+                errorMessage:"Nu există un cont cu această adresă de email!"
             });
         
         const verifyPassword = await bcrypt.compare(req.body.password, existingUser.password);
         if(!verifyPassword)
             return res.status(400).json({
-                errorMessage:"Your password is incorrect!"
+                errorMessage:"Parola este incorectă!"
             });
         
         const token = jwt.sign({_id: existingUser._id, firstName: existingUser.firstName, lastName: existingUser.lastName}, process.env.TOKEN_SECRET);
