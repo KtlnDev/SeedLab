@@ -1,10 +1,11 @@
 .item-view{
-    width: 45%;
-    height: 23vh;
+    width: 75%;
     background-color: white;
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .name{
@@ -15,38 +16,34 @@
 .name > label{
     font-size: 30px;
     margin-left: 20px;
-    color:green;
+    color:#0B6E4F;
 }
 
 .value-container{
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 60% 40%;
 }
 
 .value-unit{
     margin-bottom: 20px;
 }
+
 .value{
     font-size: 8vh;
     margin-left: 20px;
-    color:green;
+    color:#5F7470;
 }
 
 .unit{
     font-size: 5vh;
-    color:green;
+    color:#5F7470;
     margin-left: 5px;
 }
 
 .icon-design{
-    width: 30%;
-    margin: 5%;
-    margin-left: 20%;
-}
-
-.extraInfo{
-    font-size: 2vh;
-    margin-top: 40px;
-    color:#697268;
-    margin-left: 20px;
+    width: 70%;
+    height: 70%;
+    margin-top: 10%;
+    margin-left: 10%;
 }
