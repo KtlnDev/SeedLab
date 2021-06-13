@@ -1,45 +1,131 @@
 .dashboard{
     width: 100%;
-    height: 100vh;
+    height: calc(100% - 46px);
     background-color: #E0E2DB;
-    display:flex;
-    flex-direction: column;
-}
-.content-page{
     display: flex;
     flex-direction: row;
 }
 
-.card{ 
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 40px;
+.right-side-dashboard{
+    width: 20%;
 }
 
-.configuration{
-    width: 50%;
-    height: 95vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.left-side-dashboard{
+    width: 80%;
+    display: grid;
+    grid-template-rows: 70% 30%;
+}
+.chart-side{
+
 }
 
-.row{
-    display: flex;
-    flex-direction: row;
+.actuator-side{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    padding: 10px;
 }
-
-.last-row{
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-}
-
-.configuration-view{
-    width:90%;
-    height: 90vh;
-    margin-top:20px;
+.set-parameters-container{
     background-color: white;
     border-radius: 20px;
+    margin: 5px 10px;
+    padding: 10px;
+}
+
+.actuator-status{
+    background-color: white;
+    border-radius: 20px;
+    margin: 5px 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.form-params{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-params > div{
+    width: 100%;
+    color:black;
+    margin: 4px;
+}
+
+.numeric-input{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.numeric-input > div{
+    margin: 2px;
+}
+.numeric-input > div >label{
+    color:black;
+}
+
+.light-container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.light-container > label{
+    font-size: 20px;
+    margin-left: 20px;
+    align-self: center;
+}
+
+.btn-on:focus{
+    background-color: green;
+}
+
+.btn-off:focus{
+    background-color: red;
+}
+
+.cooler-status{
+    background-color:#A9B2AC;
+    border-radius: 20px 0 0 20px;
+    border-right: dashed #36311F;
+    padding-top: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+}
+.pump-status{
+    background-color:#A9B2AC;
+    border-right: dashed #36311F;
+    padding-top: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+}
+.light-status{
+    background-color:#A9B2AC;
+    border-right: dashed #36311F;
+    padding-top: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+}
+.water-level{
+    background-color:#5BC3EB;
+    border-radius: 0 20px 20px 0;
+    padding-top: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+}
+.label-actuator{
+    font-size: 24px;
+    margin-left: 15px;
+}
+.icon-actuator{
+    margin-left: 60px;
+}
+.label-status-actuator{
+    font-size: 28px;
+    margin-left: 60px;
+}
+.label-water-level{
+    font-size: 60px;
+    margin-left: 40px;
 }

@@ -19,7 +19,7 @@ const NavigationBar = (props) =>{
            <span className="title">SeedLab</span>
            <div className="links">
                 <a href='/main-page'>DASHBOARD</a>|
-                <a href='/main-page/configuration'>CONFIGURATION</a>
+                <a href='/main-page/configuration'>NOTIȚE</a>
            </div>
            <span className="username">{props.username}</span>
            <button className="logout"><img src={LogoutIcon} alt="Not found" onClick={logoutHandler}/></button>
