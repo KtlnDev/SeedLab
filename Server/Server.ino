@@ -10,7 +10,7 @@
 #define trigPin 9
 
 byte mac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-IPAddress ip(192,168,1,7);
+IPAddress ip(192,168,1,5);
 EthernetServer server(80);
 EthernetClient client;
 
@@ -72,7 +72,8 @@ float getWaterLevel(){
   digitalWrite(trigPin, LOW);
   duration_us = pulseIn(echoPin, HIGH);
   level = 0.017 * duration_us;
-  return level;
+  int water_level = map(level,1,8,100,0);
+  return water_level;
 }
 
 void setup() {
@@ -80,7 +81,7 @@ void setup() {
   Ethernet.begin(mac,ip);
   dht.begin();
   server.begin();
-  Serial.print("server is at ");
+  Serial.print("Server is up and running at ");
   Serial.println(Ethernet.localIP()); 
 
   pinMode(COOLER,OUTPUT);
@@ -94,12 +95,12 @@ void setup() {
 }
 
 void loop() {
-
   float h = dht.readHumidity( );
   float t = dht.readTemperature( );
   int soilMoistureInput = analogRead(A0);
-  int soilMoisture = map(soilMoistureInput,200,1100,100,0);
-  int light = analogRead(A1);
+  int soilMoisture = map(soilMoistureInput,0,1023,100,0);
+  int lightInput = analogRead(A1);
+  int light = map(lightInput,0,1023,0,100);
 
   JsonObject object = docOut.to<JsonObject>();
 
@@ -142,12 +143,14 @@ void loop() {
                   set_soil_moisture = docIn["soilMoisture"];
                   control_light = docIn["light"];
                                     
-                  client.println ("HTTP/1.1 200 OK");
-                  client.println ("Content-Type: application/json");
+                  client.println("HTTP/1.1 200 OK");
+                  client.println("Content-Type: application/json");
                   client.println("Access-Control-Allow-Origin: *");
-                  client.println ("Connection: close");
-                  client.println ("Refresh: 2");
-                  client.println ( );
+                  client.println("Access-Control-Allow-Credentials: true");
+                  client.println("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+                  client.println("Connection: close");
+                  client.println("Refresh: 2");
+                  client.println( );
                   client.print (output);
                   break;
                 }
