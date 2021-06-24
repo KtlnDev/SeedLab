@@ -17,6 +17,9 @@ export default function Configuration(props){
         setDisplayPlantName(plantName);
         setDisplaySelectedDate(selectedDate);
         setDisplayExtraInfo(extraInfo);
+        localStorage.setItem('plantName',plantName);
+        localStorage.setItem('selectedDate',selectedDate);
+        localStorage.setItem('extraInfo',extraInfo);
     }
 
     return(
@@ -51,10 +54,10 @@ export default function Configuration(props){
             </div>
             <div className="display-container">
                 <div className="display-info">
-                    <label>Numele plantei: {displayPlantName}</label>
-                    <label>Data plantării: {displaySelectedDate}</label>
+                    <label>Numele plantei: {localStorage.getItem('plantName')}</label>
+                    <label>Data plantării: {localStorage.getItem('selectedDate')}</label>
                     <label>Informații suplimentare:</label>
-                    <label>{displayExtraInfo}</label>
+                    <label>{localStorage.getItem('extraInfo')}</label>
                 </div>
             </div>
         </div>
