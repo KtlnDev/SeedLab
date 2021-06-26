@@ -7,16 +7,8 @@ export default function Configuration(props){
     const [plantName, setPlantName] = useState('');
     const [selectedDate, setSelectedDate] = useState(new Date().toLocaleString());
     const [extraInfo, setExtraInfo] = useState('');
-
-    const [displayPlantName, setDisplayPlantName] = useState('');
-    const [displaySelectedDate, setDisplaySelectedDate] = useState(new Date().toLocaleString());
-    const [displayExtraInfo, setDisplayExtraInfo] = useState('');
     
-    function configHandler(event){
-        event.preventDefault();
-        setDisplayPlantName(plantName);
-        setDisplaySelectedDate(selectedDate);
-        setDisplayExtraInfo(extraInfo);
+    function configHandler(){
         localStorage.setItem('plantName',plantName);
         localStorage.setItem('selectedDate',selectedDate);
         localStorage.setItem('extraInfo',extraInfo);
@@ -35,7 +27,7 @@ export default function Configuration(props){
                             <TextField id="outlined-basic" variant="outlined" value={plantName} onChange={e => setPlantName(e.target.value)} />
                         </div>
                         <div className="item">
-                            <TextField id="date" label="Data plantării" type="date" defaultValue={selectedDate} InputLabelProps={{shrink: true}}  onChange={e => setSelectedDate(e.target.value)}/>
+                            <TextField id="date" label="Data plantării" type="date"  InputLabelProps={{shrink: true}}  onChange={e => setSelectedDate(e.target.value)}/>
                         </div>
                         <div className="item">
                             <label>Doriți sa adăugați informații suplimentare?</label>

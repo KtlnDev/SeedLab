@@ -16,7 +16,7 @@
     grid-template-rows: 70% 30%;
 }
 .chart-side{
-
+    overflow: auto;
 }
 
 .actuator-side{
@@ -32,6 +32,8 @@
 }
 
 .actuator-status{
+    width:98%;
+    height: 95%;
     background-color: white;
     border-radius: 20px;
     margin: 5px 10px;
@@ -85,47 +87,50 @@
     background-color:#A9B2AC;
     border-radius: 20px 0 0 20px;
     border-right: dashed #36311F;
-    padding-top: 10px;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    padding-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 .pump-status{
     background-color:#A9B2AC;
     border-right: dashed #36311F;
-    padding-top: 10px;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    padding-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 .light-status{
     background-color:#A9B2AC;
     border-right: dashed #36311F;
-    padding-top: 10px;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    padding-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 .water-level{
-    background-color:#5BC3EB;
+    background-color:#87d0ec;
     border-radius: 0 20px 20px 0;
-    padding-top: 10px;
-    display: grid;
-    grid-template-rows: auto 1fr;
+    padding-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 .label-actuator{
-    font-size: 24px;
-    margin-left: 15px;
+    font-size: 3.5vh;
 }
 .icon-actuator{
-    margin-left: 60px;
+    margin-top: 1vh;
 }
 .label-status-actuator{
-    font-size: 28px;
-    margin-left: 60px;
+    font-size: 4vh;
+    margin-top: 0.5vh;
 }
 .label-water-level{
-    font-size: 60px;
-    margin-left: 40px;
+    font-size: 7vh;
+    margin-top: 3vh;
+}
+
+.error{
+    color:red;
 }
