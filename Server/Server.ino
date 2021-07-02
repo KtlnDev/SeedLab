@@ -10,7 +10,7 @@
 #define trigPin 9
 
 byte mac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-IPAddress ip(192,168,1,7);
+IPAddress ip(192,168,1,6);
 EthernetServer server(80);
 EthernetClient client;
 
@@ -25,9 +25,9 @@ DynamicJsonDocument docIn(capacity_in);
 char output[200];
 char command[200];
 float duration_us, level;
-float set_temperature;
-float set_soil_moisture;
-int control_light;
+float set_temperature = 40;
+float set_soil_moisture = -1;
+int control_light = 0;
 
 int cooler_status;
 int water_pump_status;
@@ -56,11 +56,11 @@ void switchLight( int lightIndicator){
 }
 
 void soil_moisture_regulation(float soil_moisture, float set_soil_moisture){
-  if( soil_moisture < set_soil_moisture){
+  if( soil_moisture <= set_soil_moisture){
     digitalWrite(WATER_PUMP,LOW);
     water_pump_status = 1;
   }
-  if( soil_moisture >= set_soil_moisture){
+  if( soil_moisture > set_soil_moisture){
     digitalWrite(WATER_PUMP,HIGH);
     water_pump_status = 0;
   }
@@ -72,7 +72,8 @@ float getWaterLevel(){
   digitalWrite(trigPin, LOW);
   duration_us = pulseIn(echoPin, HIGH);
   level = 0.017 * duration_us;
-  return level;
+  int water_level = map(level,1,7,100,0);
+  return water_level;
 }
 
 void setup() {
@@ -80,7 +81,7 @@ void setup() {
   Ethernet.begin(mac,ip);
   dht.begin();
   server.begin();
-  Serial.print("server is at ");
+  Serial.print("Server is up and running at ");
   Serial.println(Ethernet.localIP()); 
 
   pinMode(COOLER,OUTPUT);
@@ -94,12 +95,13 @@ void setup() {
 }
 
 void loop() {
-
+  delay(2000);
   float h = dht.readHumidity( );
   float t = dht.readTemperature( );
   int soilMoistureInput = analogRead(A0);
-  int soilMoisture = map(soilMoistureInput,200,1100,100,0);
-  int light = analogRead(A1);
+  int soilMoisture = map(soilMoistureInput,0,1023,100,0);
+  int lightInput = analogRead(A1);
+  int light = map(lightInput,0,1023,0,100);
 
   JsonObject object = docOut.to<JsonObject>();
 
@@ -107,7 +109,7 @@ void loop() {
   object["humidity"] = h;
   object["soil_moisture"] = soilMoisture;
   object["light"] = light;
-  object["water_level"] = getWaterLevel();
+  object["water_level"] = 0;
   object["cooler_status"] = cooler_status;
   object["water_pump_status"] = water_pump_status;
   object["light_bulb_status"] = light_bulb_status;
@@ -141,13 +143,19 @@ void loop() {
                   set_temperature= docIn["temperature"];
                   set_soil_moisture = docIn["soilMoisture"];
                   control_light = docIn["light"];
+
+                  temperature_regulation(t,set_temperature);
+                  soil_moisture_regulation(soilMoisture,set_soil_moisture);
+                  switchLight(control_light);
                                     
-                  client.println ("HTTP/1.1 200 OK");
-                  client.println ("Content-Type: application/json");
+                  client.println("HTTP/1.1 200 OK");
+                  client.println("Content-Type: application/json");
                   client.println("Access-Control-Allow-Origin: *");
-                  client.println ("Connection: close");
-                  client.println ("Refresh: 2");
-                  client.println ( );
+                  client.println("Access-Control-Allow-Credentials: true");
+                  client.println("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+                  client.println("Connection: close");
+                  client.println("Refresh: 5");
+                  client.println( );
                   client.print (output);
                   break;
                 }
@@ -165,7 +173,4 @@ void loop() {
     delay(1);
     client.stop();
   }
-  temperature_regulation(t,set_temperature);
-  soil_moisture_regulation(soilMoisture,set_soil_moisture);
-  switchLight(control_light);
 }

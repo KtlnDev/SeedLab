@@ -6,18 +6,18 @@ import Dashboard from '../dashboard/dashboard-page';
 import Configuration from '../configuration/configuration-page';
 import './main.scss'
 
-const MainPage = (props) =>{
+const MainPage = () =>{
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
 
-  async function verifyIsAAuthenticated(){
+  async function verifyIsAuthenticated(){
     const res = await axios.get("http://localhost:5000/user/loggedIn")
     setIsAuthenticated(res.data.isAuthenticated);
     setUsername(res.data.username);
   }
 
   useEffect(()=>{
-      verifyIsAAuthenticated();
+      verifyIsAuthenticated();
   }, []);
 
   return(
